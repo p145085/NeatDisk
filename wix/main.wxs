@@ -105,8 +105,7 @@
                             Name='Duplicate Image Finder'
                             Description='Find and remove duplicate images from your photo library'
                             Target='[APPLICATIONFOLDER]rust_duplicates.exe'
-                            WorkingDirectory='APPLICATIONFOLDER'
-                            Icon='icon.ico'/>
+                            WorkingDirectory='APPLICATIONFOLDER'/>
                         <RemoveFolder Id='CleanUpShortCut' Directory='ApplicationProgramsFolder' On='uninstall'/>
                         <RegistryValue Root='HKCU' Key='Software\EmilJohansson\DuplicateImageFinder' Name='installed' Type='integer' Value='1' KeyPath='yes'/>
                     </Component>

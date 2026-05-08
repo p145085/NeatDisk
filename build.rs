@@ -5,6 +5,8 @@ fn main() {
     let out_dir = std::env::var("OUT_DIR").unwrap();
     let ico_path = format!("{}/icon.ico", out_dir);
     create_bmp_ico("assets/icon.png", &ico_path).expect("failed to create icon.ico");
+    // Also write to assets/ so WiX picks up the BMP-format ICO for installer icons.
+    let _ = std::fs::copy(&ico_path, "assets/icon.ico");
     let mut res = winresource::WindowsResource::new();
     res.set_icon(&ico_path);
     res.compile().expect("failed to compile Windows resources");
