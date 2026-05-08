@@ -106,7 +106,7 @@
                             Description='Find and remove duplicate images from your photo library'
                             Target='[APPLICATIONFOLDER]rust_duplicates.exe'
                             WorkingDirectory='APPLICATIONFOLDER'
-                            Icon='ProductICO'/>
+                            Icon='icon.ico'/>
                         <RemoveFolder Id='CleanUpShortCut' Directory='ApplicationProgramsFolder' On='uninstall'/>
                         <RegistryValue Root='HKCU' Key='Software\EmilJohansson\DuplicateImageFinder' Name='installed' Type='integer' Value='1' KeyPath='yes'/>
                     </Component>
@@ -136,8 +136,8 @@
           The product icon is the graphic that appears in the Add/Remove
           Programs control panel for the application.
         -->
-        <Icon Id='ProductICO' SourceFile='$(var.CargoTargetDir)\..\assets\icon.ico'/>
-        <Property Id='ARPPRODUCTICON' Value='ProductICO' />
+        <Icon Id='icon.ico' SourceFile='assets\icon.ico'/>
+        <Property Id='ARPPRODUCTICON' Value='icon.ico' />
 
         
         <!--
