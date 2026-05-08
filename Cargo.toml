@@ -12,6 +12,7 @@ upgrade-guid = "7F3A8B2C-4D1E-4F9A-B6C3-2E8D5A7F1B9C"
 
 [build-dependencies]
 winresource = "0.1"
+image = "0.24"
 
 [dependencies]
 walkdir = "2.3"
