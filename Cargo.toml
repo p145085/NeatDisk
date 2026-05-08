@@ -2,6 +2,13 @@
 name = "rust_duplicates"
 version = "0.2.0"
 edition = "2021"
+authors = ["Emil Johansson <emil.a.johansson@gmail.com>"]
+description = "Find and remove duplicate images from your photo library"
+license = "proprietary"
+
+[package.metadata.wix]
+eula = false
+upgrade-guid = "7F3A8B2C-4D1E-4F9A-B6C3-2E8D5A7F1B9C"
 
 [dependencies]
 walkdir = "2.3"
