@@ -154,6 +154,7 @@ impl App {
         // checkbox is correct even if the user manually deleted the task.
         settings.schedule_enabled = scheduler::is_registered();
         let lf_threshold = settings.large_file_threshold_mb;
+        let minimize_to_tray = settings.minimize_to_tray;
         // When launched by scheduler use the most-recent folder, else default to C:\.
         let scan_path = if auto_scan {
             settings.recent_folders.first().cloned().unwrap_or_else(|| "C:\\".to_string())
@@ -231,7 +232,7 @@ impl App {
             schedule_error: None,
             auto_scan_pending: auto_scan,
 
-            tray: AppTray::build(),
+            tray: if minimize_to_tray { AppTray::build() } else { None },
             hwnd: None,
             window_visible: true,
             quit_requested: false,
@@ -1021,7 +1022,7 @@ fn find_app_hwnd() -> Option<isize> {
 
 impl eframe::App for App {
     fn on_close_event(&mut self) -> bool {
-        if self.tray.is_some() && !self.quit_requested {
+        if self.tray.is_some() && self.settings.minimize_to_tray && !self.quit_requested {
             self.hide_window();
             false // intercept — hide to tray instead of closing
         } else {
@@ -1616,6 +1617,19 @@ impl eframe::App for App {
                         );
                     }
 
+                    ui.separator();
+                    ui.horizontal(|ui| {
+                        if ui.checkbox(&mut self.settings.minimize_to_tray, "Minimize to system tray").changed() {
+                            // Rebuild or drop the tray icon to match the new preference.
+                            self.tray = if self.settings.minimize_to_tray {
+                                AppTray::build()
+                            } else {
+                                None
+                            };
+                            self.settings.save();
+                        }
+                    });
+                    ui.add_space(4.0);
                     ui.separator();
                     ui.horizontal(|ui| {
                         ui.label("License key:");

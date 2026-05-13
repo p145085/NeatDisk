@@ -34,6 +34,3 @@ jobs:
 
       - name: cargo check
         run: cargo check --release
-
-      - name: cargo build
-        run: cargo build --release

@@ -5,6 +5,7 @@ fn default_large_file_threshold() -> u64 { 50 }
 fn default_scan_videos() -> bool { false }
 fn default_schedule_day() -> String { "MON".to_string() }
 fn default_schedule_hour() -> u8 { 9 }
+fn default_minimize_to_tray() -> bool { true }
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Settings {
@@ -37,6 +38,8 @@ pub struct Settings {
     pub schedule_day: String,
     #[serde(default = "default_schedule_hour")]
     pub schedule_hour: u8,
+    #[serde(default = "default_minimize_to_tray")]
+    pub minimize_to_tray: bool,
 }
 
 impl Default for Settings {
@@ -68,6 +71,7 @@ impl Default for Settings {
             schedule_enabled: false,
             schedule_day: default_schedule_day(),
             schedule_hour: default_schedule_hour(),
+            minimize_to_tray: true,
         }
     }
 }
@@ -89,16 +93,21 @@ impl Settings {
     }
 
     pub fn save(&self) {
+        Self::ensure_dir();
         if let Ok(json) = serde_json::to_string_pretty(self) {
             let _ = std::fs::write(Self::path(), json);
         }
     }
 
     fn path() -> PathBuf {
-        std::env::current_exe()
-            .unwrap_or_default()
-            .parent()
-            .unwrap_or(std::path::Path::new("."))
-            .join("settings.json")
+        std::env::var("APPDATA")
+            .map(|p| PathBuf::from(p).join("NeatDisk").join("settings.json"))
+            .unwrap_or_else(|_| PathBuf::from("settings.json"))
+    }
+
+    pub fn ensure_dir() {
+        if let Ok(appdata) = std::env::var("APPDATA") {
+            let _ = std::fs::create_dir_all(PathBuf::from(appdata).join("NeatDisk"));
+        }
     }
 }
