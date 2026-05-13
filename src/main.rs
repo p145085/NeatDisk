@@ -1,12 +1,21 @@
 #![windows_subsystem = "windows"]
 
 mod app;
+mod cleaner;
+mod disk_analyzer;
 mod hasher;
+mod large_files;
 mod license;
 mod scanner;
+mod scheduler;
 mod settings;
+mod tray;
+mod updater;
 
 fn main() {
+    // When launched by Task Scheduler the app auto-starts a scan of the last used folder.
+    let auto_scan = std::env::args().any(|a| a == "--scheduled-scan");
+
     let icon = load_icon();
     let options = eframe::NativeOptions {
         drag_and_drop_support: true,
@@ -17,9 +26,9 @@ fn main() {
     };
 
     let _ = eframe::run_native(
-        "Duplicate Image Finder",
+        "NeatDisk",
         options,
-        Box::new(|_cc| Box::new(app::App::new())),
+        Box::new(move |_cc| Box::new(app::App::new(auto_scan))),
     );
 }
 

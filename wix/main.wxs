@@ -60,7 +60,7 @@
 
     <Product
         Id='*'
-        Name='Duplicate Image Finder'
+        Name='NeatDisk'
         UpgradeCode='7F3A8B2C-4D1E-4F9A-B6C3-2E8D5A7F1B9C'
         Manufacturer='Emil Johansson'
         Language='1033'
@@ -69,7 +69,7 @@
 
         <Package Id='*'
             Keywords='Installer'
-            Description='Find and remove duplicate images from your photo library'
+            Description='Disk cleaner and duplicate finder for Windows'
             Manufacturer='Emil Johansson'
             InstallerVersion='450'
             Languages='1033'
@@ -83,31 +83,31 @@
             DowngradeErrorMessage='A newer version of [ProductName] is already installed. Setup will now exit.'/>
 
         <Media Id='1' Cabinet='media1.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1'/>
-        <Property Id='DiskPrompt' Value='rust_duplicates Installation'/>
+        <Property Id='DiskPrompt' Value='NeatDisk Installation'/>
 
         <Directory Id='TARGETDIR' Name='SourceDir'>
             <Directory Id='$(var.PlatformProgramFilesFolder)' Name='PFiles'>
-                <Directory Id='APPLICATIONFOLDER' Name='Duplicate Image Finder'>
+                <Directory Id='APPLICATIONFOLDER' Name='NeatDisk'>
                     <Component Id='binary0' Guid='*'>
                         <File
                             Id='exe0'
-                            Name='rust_duplicates.exe'
+                            Name='neat_disk.exe'
                             DiskId='1'
-                            Source='$(var.CargoTargetBinDir)\rust_duplicates.exe'
+                            Source='$(var.CargoTargetBinDir)\neat_disk.exe'
                             KeyPath='yes'/>
                     </Component>
                 </Directory>
             </Directory>
             <Directory Id='ProgramMenuFolder'>
-                <Directory Id='ApplicationProgramsFolder' Name='Duplicate Image Finder'>
+                <Directory Id='ApplicationProgramsFolder' Name='NeatDisk'>
                     <Component Id='ApplicationShortcut' Guid='*'>
                         <Shortcut Id='ApplicationStartMenuShortcut'
-                            Name='Duplicate Image Finder'
-                            Description='Find and remove duplicate images from your photo library'
-                            Target='[APPLICATIONFOLDER]rust_duplicates.exe'
+                            Name='NeatDisk'
+                            Description='Disk cleaner and duplicate finder for Windows'
+                            Target='[APPLICATIONFOLDER]neat_disk.exe'
                             WorkingDirectory='APPLICATIONFOLDER'/>
                         <RemoveFolder Id='CleanUpShortCut' Directory='ApplicationProgramsFolder' On='uninstall'/>
-                        <RegistryValue Root='HKCU' Key='Software\EmilJohansson\DuplicateImageFinder' Name='installed' Type='integer' Value='1' KeyPath='yes'/>
+                        <RegistryValue Root='HKCU' Key='Software\EmilJohansson\NeatDisk' Name='installed' Type='integer' Value='1' KeyPath='yes'/>
                     </Component>
                 </Directory>
             </Directory>
@@ -116,7 +116,7 @@
         <Feature
             Id='Binaries'
             Title='Application'
-            Description='Installs Duplicate Image Finder'
+            Description='Installs NeatDisk'
             Level='1'
             ConfigurableDirectory='APPLICATIONFOLDER'
             AllowAdvertise='no'
@@ -148,7 +148,7 @@
           2. Change the value for `Value` attribute of the following
              `Property` tag to a valid URL.
         -->
-        <Property Id='ARPHELPLINK' Value='https://www.emiljohansson.info/softwares/duplicate-image-finder'/>
+        <Property Id='ARPHELPLINK' Value='https://www.emiljohansson.info/softwares/neat-disk'/>
 
         <UI>
             <UIRef Id='WixUI_FeatureTree'/>

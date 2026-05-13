@@ -4,8 +4,7 @@ use std::path::PathBuf;
 
 type HmacSha256 = Hmac<Sha256>;
 
-// Must match the LICENSE_SECRET environment variable set in your Cloudflare Worker dashboard.
-const SECRET: &[u8] = b"46c2b2aa1835a2e76dd66ab1ca140ec16384e80f60e9f54efa0bbff2f9b96cccfb29370b41c37ed1";
+const SECRET: &[u8] = env!("LICENSE_SECRET").as_bytes();
 
 /// Returns true if the key has a valid HMAC-SHA256 signature.
 pub fn validate_key(key: &str) -> bool {
@@ -45,5 +44,5 @@ pub fn is_pro() -> bool {
 fn key_dir() -> Option<PathBuf> {
     std::env::var("APPDATA")
         .ok()
-        .map(|p| PathBuf::from(p).join("DuplicateFinder"))
+        .map(|p| PathBuf::from(p).join("NeatDisk"))
 }
