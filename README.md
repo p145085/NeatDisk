@@ -2,7 +2,7 @@
 
 A fast Windows desktop app for finding duplicate files, cleaning junk, and understanding what's eating your disk space.
 
-![NeatDisk screenshot](assets/homepage.png)
+![NeatDisk screenshot](assets/duplicates.png)
 
 ## Features
 
