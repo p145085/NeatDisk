@@ -1,5 +1,10 @@
 # NeatDisk
 
+[![Built with Rust](https://img.shields.io/badge/built%20with-Rust-orange?logo=rust&logoColor=white)](https://www.rust-lang.org)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue?logo=windows&logoColor=white)](https://github.com/p145085/NeatDisk/releases)
+[![Latest release](https://img.shields.io/github/v/release/p145085/NeatDisk)](https://github.com/p145085/NeatDisk/releases)
+[![Source available](https://img.shields.io/badge/source-available-brightgreen?logo=github)](https://github.com/p145085/NeatDisk)
+
 A fast Windows desktop app for finding duplicate files, cleaning junk, and understanding what's eating your disk space.
 
 ![NeatDisk screenshot](assets/duplicates.png)
