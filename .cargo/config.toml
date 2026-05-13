@@ -1,0 +1,5 @@
+[env]
+# Placeholder for local development — release builds use the real secret
+# from the LICENSE_SECRET GitHub Actions secret. Keys generated locally
+# will not validate against production builds.
+LICENSE_SECRET = "dev-secret-local-only"
