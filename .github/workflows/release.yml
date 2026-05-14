@@ -46,10 +46,17 @@ jobs:
       - name: Build MSI installer
         run: cargo wix --no-build --nocapture
 
+      - name: Install cargo-packager
+        run: cargo install cargo-packager --locked --version "0.11.3"
+
+      - name: Build MSIX (Microsoft Store)
+        run: cargo packager --release --verbose
+
       - name: Rename artifacts
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}"
+
           $exe_src = "target\release\neat_disk.exe"
           $exe_dst = "NeatDisk-$version-x64.exe"
           Copy-Item $exe_src $exe_dst
@@ -59,8 +66,14 @@ jobs:
           $msi_dst = "NeatDisk-$version-x64.msi"
           Copy-Item $msi.FullName $msi_dst
 
+          # cargo-packager outputs to dist\
+          $msix = Get-ChildItem "dist\*.msix" | Select-Object -First 1
+          $msix_dst = "NeatDisk-$version-x64.msix"
+          Copy-Item $msix.FullName $msix_dst
+
           echo "EXE=$exe_dst" >> $env:GITHUB_ENV
           echo "MSI=$msi_dst" >> $env:GITHUB_ENV
+          echo "MSIX=$msix_dst" >> $env:GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -69,3 +82,4 @@ jobs:
           files: |
             ${{ env.EXE }}
             ${{ env.MSI }}
+            ${{ env.MSIX }}

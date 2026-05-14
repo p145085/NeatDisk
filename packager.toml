@@ -1,0 +1,23 @@
+product-name = "NeatDisk"
+version = "0.2.0"
+identifier = "info.emiljohansson.neatdisk"
+description = "Disk cleaner and duplicate finder for Windows"
+homepage = "https://emiljohansson.info/softwares/neat-disk"
+authors = ["Emil Johansson"]
+license = "proprietary"
+icons = ["assets/icon.png"]
+out-dir = "dist"
+
+[[binaries]]
+path = "target/release/neat_disk"
+main = true
+
+[formats]
+msix = {}
+
+[windows]
+digest-algorithm = "sha256"
+# TODO: replace with your exact Publisher string from Partner Center:
+# partner.microsoft.com → Account settings → Organization profile → Publisher
+# It looks like: CN=Emil Johansson, O=Emil Johansson, C=SE
+publisher = "CN=Emil Johansson"
